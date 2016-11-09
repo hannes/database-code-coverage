@@ -32,7 +32,7 @@ public class MultipleTableDatabaseExample {
 
   private static final Logger LOG = LoggerFactory
       .getLogger(MultipleTableDatabaseExample.class);
-  private final Connection databaseConnection;
+  private static Connection databaseConnection;
 
   private static final DateFormat DATE_FORMAT = new SimpleDateFormat(
       "yyyy-MM-dd");
@@ -40,7 +40,7 @@ public class MultipleTableDatabaseExample {
   private static final String TABLE_CONTRACT = "contract";
   private static final String TABLE_ACCOUNT = "account";
   private static final String TABLE_ACCOUNT_WITHIN_CONTRACT = "account_within_contract";
-  private boolean haveTablesBeenInitiated = false;
+  private static boolean haveTablesBeenInitiated = false;
 
   public MultipleTableDatabaseExample() throws Exception {
     String url = "jdbc:hsqldb:file:target/testdatabasemultiple";
@@ -63,6 +63,10 @@ public class MultipleTableDatabaseExample {
     props.addProperties(p);
 
     databaseConnection = new ConnectionWrapper(props);
+  }
+
+  public Connection getConn() {
+    return databaseConnection;
   }
 
   private void initiateDatabaseWhenNecessary() throws Exception {

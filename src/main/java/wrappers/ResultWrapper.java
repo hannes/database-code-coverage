@@ -39,12 +39,10 @@ public class ResultWrapper implements ResultSet {
     try {
       wrappedResult = RowSetProvider.newFactory().createCachedRowSet();
       wrappedResult.populate(rs);
-
       // wrappedResult.
     } catch (SQLException e) {
       e.printStackTrace();
     }
-
   }
 
   public boolean next() throws SQLException {

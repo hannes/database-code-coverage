@@ -1,11 +1,13 @@
 package com.company.codecoveragetester.test;
 
-import com.company.codecoveragetester.DatabaseExample;
 import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.company.codecoveragetester.DatabaseExample;
 
 /**
  * Unittests for the class using a database connection

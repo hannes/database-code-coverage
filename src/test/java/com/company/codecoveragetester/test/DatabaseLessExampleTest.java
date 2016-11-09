@@ -1,8 +1,9 @@
 package com.company.codecoveragetester.test;
 
-import com.company.codecoveragetester.DatabaseLessExample;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.company.codecoveragetester.DatabaseLessExample;
 
 /**
  * Unittests for the databaseless class
