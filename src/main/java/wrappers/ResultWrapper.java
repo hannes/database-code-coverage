@@ -22,26 +22,46 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Map;
 
+import javax.sql.rowset.CachedRowSet;
+import javax.sql.rowset.RowSetProvider;
+
 public class ResultWrapper implements ResultSet {
-  private ResultSet wrappedResult = null;
+  public static boolean PRETEND_UNKNOWN_FIELD = false;
+
+  private CachedRowSet wrappedResult = null;
 
   public static boolean NEXT_THROW_EXCEPTION = false;
-  
-  public static int NEXT_INVOCATIONS = 0;
+  public static boolean CHECK_ALL_FETCHED = false;
+
+  public int nextInv = 0;
 
   public ResultWrapper(ResultSet rs) {
-    this.wrappedResult = rs;
+    try {
+      wrappedResult = RowSetProvider.newFactory().createCachedRowSet();
+      wrappedResult.populate(rs);
+
+      // wrappedResult.
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
   }
 
   public boolean next() throws SQLException {
     if (NEXT_THROW_EXCEPTION) {
       throw new RuntimeException("THROW_EXCEPTION_NEXT");
     }
-    NEXT_INVOCATIONS++;
+    nextInv++;
     return wrappedResult.next();
   }
 
   public void close() throws SQLException {
+    if (CHECK_ALL_FETCHED) {
+      if (nextInv < wrappedResult.size()) {
+        throw new RuntimeException("Not all rows were fetched! "
+            + wrappedResult.size() + " vs " + nextInv);
+      }
+    }
     wrappedResult.close();
   }
 
@@ -111,6 +131,9 @@ public class ResultWrapper implements ResultSet {
   }
 
   public String getString(String columnLabel) throws SQLException {
+    if (PRETEND_UNKNOWN_FIELD) {
+      throw new SQLException("You asked me not to know a field");
+    }
     return wrappedResult.getString(columnLabel);
   }
 

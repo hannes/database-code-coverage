@@ -1,19 +1,22 @@
 package com.company.codecoveragetester.test;
 
-import com.company.codecoveragetester.MultipleTableDatabaseExample;
-import com.company.codecoveragetester.model.AccountData;
-import com.company.codecoveragetester.model.AccountTypeData;
-import com.company.codecoveragetester.model.ContractData;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.company.codecoveragetester.MultipleTableDatabaseExample;
+import com.company.codecoveragetester.model.AccountData;
+import com.company.codecoveragetester.model.AccountTypeData;
+import com.company.codecoveragetester.model.ContractData;
 
 /**
  * Unittests for the class using a database connection having multiple tables
@@ -60,6 +63,7 @@ public class MultipleTableDatabaseExampleTest {
         example.linkAccountToContractInTheDatabase(CONTRACT_3, "FR12DE9", "YY");
         example.linkAccountToContractInTheDatabase(CONTRACT_2, "BE34FG7", "YY");
     }
+    
     
     @Test
     public void deleteTest() throws Exception {

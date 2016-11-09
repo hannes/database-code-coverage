@@ -84,6 +84,7 @@ public class MultipleTableDatabaseExample {
     } catch (SQLException ex) {
       LOG.debug("Error encountered, creating the table now: {}",
           ex.getLocalizedMessage());
+      ex.printStackTrace();
       createTables();
     }
     haveTablesBeenInitiated = true;
