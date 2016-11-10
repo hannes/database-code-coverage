@@ -7,9 +7,9 @@ import java.sql.Statement;
 import org.hsqldb.jdbc.JDBCConnection;
 import org.hsqldb.persist.HsqlProperties;
 
-public class ConnectionWrapper extends JDBCConnection {
+public class ResultModificationConnectionWrapper extends JDBCConnection {
 
-  public ConnectionWrapper(HsqlProperties props) throws SQLException {
+  public ResultModificationConnectionWrapper(HsqlProperties props) throws SQLException {
     super(props);
   }
 

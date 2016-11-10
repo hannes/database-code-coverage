@@ -21,7 +21,7 @@ import com.company.codecoveragetester.model.AccountData;
 import com.company.codecoveragetester.model.AccountTypeData;
 import com.company.codecoveragetester.model.ContractData;
 
-import wrappers.ConnectionWrapper;
+import wrappers.ResultModificationConnectionWrapper;
 
 /**
  * Unittests for a class using a database connection, having multiple tables
@@ -43,26 +43,21 @@ public class MultipleTableDatabaseExample {
   private static boolean haveTablesBeenInitiated = false;
 
   public MultipleTableDatabaseExample() throws Exception {
+    
+    
     String url = "jdbc:hsqldb:file:target/testdatabasemultiple";
     LOG.info("Connecting to: {}", url);
 
-    // BasicDataSource basicDataSource = new BasicDataSource();
-    // basicDataSource.setDriverClassName("com.company.codecoveragetester.DriverWrapper");
-    // basicDataSource.setUrl(url);
-    // basicDataSource.setUsername("sa");
-    // basicDataSource.setPassword("");
-    // databaseConnection = basicDataSource.getConnection();
-    //
-    //
     Properties p = new Properties();
     p.setProperty("user", "sa");
     p.setProperty("password", "");
 
     HsqlProperties props = DatabaseURL.parseURL(url, true, false);
-
     props.addProperties(p);
 
-    databaseConnection = new ConnectionWrapper(props);
+    databaseConnection = new ResultModificationConnectionWrapper(props);
+    
+    
   }
 
   public Connection getConn() {

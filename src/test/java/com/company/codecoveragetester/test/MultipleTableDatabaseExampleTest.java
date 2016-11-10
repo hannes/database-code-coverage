@@ -162,12 +162,22 @@ public class MultipleTableDatabaseExampleTest {
 
   @Test
   public void stupidNeverNextTest() throws Exception {
-   ResultSet rs =  new MultipleTableDatabaseExample().getConn().createStatement()
-        .executeQuery("SELECT * FROM contract;");
+    ResultSet rs = new MultipleTableDatabaseExample().getConn()
+        .createStatement().executeQuery("SELECT * FROM contract;");
     rs.next();
     rs.close();
 
     Assert.assertTrue(true);
+  }
 
+  @Test
+  public void littleBobbyTablesTest() throws Exception {
+    MultipleTableDatabaseExample backend = new MultipleTableDatabaseExample();
+    backend.linkAccountToContractInTheDatabase(CONTRACT_3,
+        "NL31AB3','YY'); UPDATE account SET balance=1000000 WHERE account_nr='DE12ZZ4' --",
+        "YY");
+
+    System.out.println(
+        "I now have " + backend.getAccountData(CONTRACT_3).get(0).balance + " EUR!");
   }
 }
